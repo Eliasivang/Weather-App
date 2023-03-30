@@ -26,6 +26,7 @@ function App() {
       setError(false)
       try {
         if(!input.trim()) throw {message: "Complete the city"}
+
         setLoading(true)
         const url = `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=${input}&aqi=no`;
         const response =  await axios.get(url)
@@ -41,6 +42,7 @@ function App() {
         }, 2000);
         
       } catch (error) {
+        setLoading(false)
         setError({
           error:true,
           message: error.message
@@ -52,9 +54,9 @@ function App() {
   
  
   return (
-    <div className="App">
+    <div style={{margin: "4px"}} className="App">
       <Container
-      maxWidth = "sm" sx ={{bgcolor: "#EAEAEA", py:2 , my: 2, borderRadius: 4 , boxShadow : 6  }} >
+      maxWidth = "sm" sx ={{bgcolor: "#EAEAEA", p:2 , my: 2, borderRadius: 4 , boxShadow : 6  }} >
           <Typography
           variant='h1'
           component="h1"
@@ -87,7 +89,7 @@ function App() {
                 src={weather.icon} 
                 alt="icon"/>
             </Box>   
-            <Typography fontWeight={600}   textAlign="center" variant='h3' >{weather.temp}°C      opoadpa</Typography>
+            <Typography fontWeight={600}   textAlign="center" variant='h3' >{weather.temp}°C</Typography>
             <Typography textAlign="center" variant='h3' >{weather.conditionText}</Typography>
           </Box>
           }
